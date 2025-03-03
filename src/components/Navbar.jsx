@@ -18,9 +18,6 @@ function Navbar({ setVisibleStyled }) {
           Board <span>- Help-Desk Ticket</span>
         </h2>
       </div>
-      <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-        <i className="fa-regular fa-circle-question fa-lg"></i>
-      </div>
       <SideBar
         isSideBarOpen={isSideBarOpen}
         setIsSideBarOpen={setIsSideBarOpen}

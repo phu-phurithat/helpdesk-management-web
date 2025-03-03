@@ -50,3 +50,15 @@ export const updateTicket = async (id, updatedTicket) => {
   const data = await response.json();
   return data;
 };
+
+export const createTicket = async (newTicket) => {
+  const response = await fetch(`${BASE_URL}/api/v1/tickets`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newTicket),
+  });
+  const data = await response.json();
+  return data;
+};

@@ -8,9 +8,11 @@ import {
   getSortedAndPagedTickets,
   getSortedAndFilteredAndPagedTickets,
   updateTicket,
+  createTicket,
 } from "../services/api";
 import PageSelector from "./PageSelector";
 import PageSizeSelector from "./PageSizeSelector";
+import TicketModal from "./TicketModal";
 
 function Board() {
   const [tickets, setTickets] = useState([]);
@@ -21,6 +23,7 @@ function Board() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [totalPages, setTotalPages] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const columns = ["Pending", "Accepted", "Resolved", "Rejected"];
 
@@ -88,6 +91,15 @@ function Board() {
     }
   };
 
+  const handleCreateTicket = async (newTicket) => {
+    try {
+      const response = await createTicket(newTicket);
+      setTickets((prevTickets) => [...prevTickets, response]);
+    } catch (error) {
+      console.error("Error creating ticket:", error);
+    }
+  };
+
   useEffect(() => {
     fetchTickets();
   }, [sortBy, selectedStatus, currentPage, pageSize]);
@@ -134,6 +146,12 @@ function Board() {
                 selectedStatus={selectedStatus}
                 setSelectedStatus={setSelectedStatus}
               />
+              <div
+                className="w-8 h-8 bg-white shadow-sm shadow-black/50 rounded-xl flex items-center justify-center cursor-pointer hover:bg-gray-100"
+                onClick={() => setIsModalOpen(true)}
+              >
+                <i className="fa-solid fa-plus text-emerald-600"></i>
+              </div>
             </div>
           </div>
           <div className="flex gap-4">
@@ -157,6 +175,13 @@ function Board() {
             />
           ))}
         </div>
+        {isModalOpen && (
+          <TicketModal
+            ticket={null}
+            onClose={() => setIsModalOpen(false)}
+            onSave={handleCreateTicket}
+          />
+        )}
       </section>
     </DragDropContext>
   );

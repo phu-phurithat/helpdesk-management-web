@@ -3,6 +3,15 @@ import { useState } from "react";
 const TicketModal = ({ ticket, onClose, onSave }) => {
   const [editedTicket, setEditedTicket] = useState({ ...ticket });
 
+  if (!ticket) {
+    ticket = {
+      contact: "",
+      title: "",
+      description: "",
+      status: null,
+    };
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditedTicket((prev) => ({ ...prev, [name]: value }));
@@ -31,6 +40,7 @@ const TicketModal = ({ ticket, onClose, onSave }) => {
           value={editedTicket.contact}
           onChange={handleChange}
           className="w-full border p-2 rounded mt-1"
+          placeholder="example@example.com"
         />
 
         <label className="block text-sm mt-2">Title:</label>
@@ -40,6 +50,7 @@ const TicketModal = ({ ticket, onClose, onSave }) => {
           value={editedTicket.title}
           onChange={handleChange}
           className="w-full border p-2 rounded mt-1"
+          placeholder="Ticket title"
         />
 
         <label className="block text-sm mt-2">Description:</label>
@@ -48,20 +59,53 @@ const TicketModal = ({ ticket, onClose, onSave }) => {
           value={editedTicket.description}
           onChange={handleChange}
           className="w-full border p-2 rounded mt-1"
+          placeholder="Ticket description"
         ></textarea>
 
-        <label className="block text-sm mt-2">Status:</label>
-        <select
-          name="status"
-          value={editedTicket.status}
-          onChange={handleChange}
-          className="w-full border p-2 rounded mt-1"
-        >
-          <option value="pending">Pending</option>
-          <option value="accepted">Accepted</option>
-          <option value="resolved">Resolved</option>
-          <option value="rejected">Rejected</option>
-        </select>
+        {ticket.status && (
+          <div>
+            <label className="block text-sm mt-2">Status:</label>
+            <select
+              name="status"
+              value={editedTicket.status.toLowerCase()}
+              onChange={handleChange}
+              className={`w-full border p-2 rounded mt-1 
+                ${
+                  editedTicket.status.toLowerCase() === "pending"
+                    ? "bg-yellow-100"
+                    : ""
+                }
+                ${
+                  editedTicket.status.toLowerCase() === "accepted"
+                    ? "bg-blue-100"
+                    : ""
+                }
+                ${
+                  editedTicket.status.toLowerCase() === "resolved"
+                    ? "bg-green-100"
+                    : ""
+                }
+                ${
+                  editedTicket.status.toLowerCase() === "rejected"
+                    ? "bg-red-200"
+                    : ""
+                }`}
+            >
+              <option className="bg-yellow-100" value="pending">
+                Pending
+              </option>
+              <option className="bg-blue-100" value="accepted">
+                Accepted
+              </option>
+              <option className="bg-green-100" value="resolved">
+                Resolved
+              </option>
+              <option className="bg-red-100" value="rejected">
+                Rejected
+              </option>
+            </select>
+          </div>
+        )}
 
         <div className="flex justify-end gap-2 mt-4">
           <button

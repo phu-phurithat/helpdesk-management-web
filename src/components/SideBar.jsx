@@ -10,7 +10,7 @@ function SideBar({ isSideBarOpen, setIsSideBarOpen, setVisibleStyled }) {
         className="absolute top-4 right-4 text-white"
         onClick={() => setIsSideBarOpen(false)}
       >
-        ✖
+        <i className="fa-solid fa-xmark"></i>
       </button>
 
       <div className="p-4">

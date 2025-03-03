@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Board from "../components/Board";
 import Table from "../components/Table";
 function Home() {
-  const [visibleStyled, setVisibleStyled] = useState("board"); // "board" or "lists"
+  const [visibleStyled, setVisibleStyled] = useState("board"); // "board" or "table"
 
   return (
     <div className="w-screen h-screen relative ">

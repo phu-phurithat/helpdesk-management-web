@@ -76,7 +76,6 @@ function Table() {
                 pageSize
               );
       }
-      console.log(data);
       setTickets(data.content);
       setTotalPages(data.totalPages);
     } catch (error) {

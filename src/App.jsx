@@ -7,7 +7,6 @@ function App() {
     <main className="main-content h-screen">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="lists" element={<Lists />} />
       </Routes>
     </main>
   );

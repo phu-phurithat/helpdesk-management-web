@@ -68,13 +68,23 @@ function Board() {
                 pageSize
               );
       }
-      console.log(data);
       setTickets(data.content);
       setTotalPages(data.totalPages);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSave = async (updatedTicket) => {
+    try {
+      const response = await updateTicket(updatedTicket.id, updatedTicket);
+      setTickets((prevTickets) =>
+        prevTickets.map((t) => (t.id === response.id ? response : t))
+      );
+    } catch (error) {
+      console.error("Error updating ticket:", error);
     }
   };
 
@@ -136,13 +146,14 @@ function Board() {
           </div>
         </div>
         <div className="grid grid-cols-4 gap-4 h-[90%]">
-          {columns.map((status, index) => (
+          {columns.map((status) => (
             <Column
               key={status}
               status={status}
               tickets={filteredTicket.filter(
                 (ticket) => ticket.status === status?.toUpperCase()
               )}
+              onSave={handleSave}
             />
           ))}
         </div>

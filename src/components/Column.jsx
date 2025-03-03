@@ -1,7 +1,7 @@
 import { Droppable, Draggable } from "@hello-pangea/dnd";
 import TicketCard from "./TicketCard";
 
-const Column = ({ status, tickets }) => {
+const Column = ({ status, tickets, onSave }) => {
   const statusBodyColors = {
     Pending: "bg-yellow-100",
     Accepted: "bg-blue-100",
@@ -14,6 +14,7 @@ const Column = ({ status, tickets }) => {
     Resolved: "bg-green-200",
     Rejected: "bg-red-200",
   };
+
   return (
     <Droppable droppableId={status}>
       {(provided) => (
@@ -44,7 +45,11 @@ const Column = ({ status, tickets }) => {
                       snapshot.isDragging ? "scale-105" : ""
                     }`}
                   >
-                    <TicketCard key={ticket.id} ticket={ticket} />
+                    <TicketCard
+                      key={ticket.id}
+                      ticket={ticket}
+                      onSave={onSave}
+                    />
                   </div>
                 )}
               </Draggable>

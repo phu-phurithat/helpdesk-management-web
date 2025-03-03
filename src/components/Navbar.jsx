@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SideBar from "./SideBar";
 
-function Navbar() {
+function Navbar({ setVisibleStyled }) {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
   return (
@@ -24,6 +24,7 @@ function Navbar() {
       <SideBar
         isSideBarOpen={isSideBarOpen}
         setIsSideBarOpen={setIsSideBarOpen}
+        setVisibleStyled={setVisibleStyled}
       />
     </nav>
   );

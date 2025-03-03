@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function SideBar({ isSideBarOpen, setIsSideBarOpen }) {
   return (
     <div
@@ -16,14 +18,22 @@ function SideBar({ isSideBarOpen, setIsSideBarOpen }) {
       <div className="p-4">
         <h2 className="text-xl font-bold">Visible Menu</h2>
         <ul className="mt-4 space-y-2">
-          <a href="#" onClick={() => setIsSideBarOpen(false)}>
-            <li className="hover:bg-gray-700 p-2 rounded w-full">
+          <li
+            className="hover:bg-gray-700 p-2 rounded w-full cursor-pointer"
+            onClick={() => setIsSideBarOpen(false)}
+          >
+            <Link to="/" className="block w-full">
               KanBan Board
-            </li>
-          </a>
-          <a href="lists" onClick={() => setIsSideBarOpen(false)}>
-            <li className="hover:bg-gray-700 p-2 rounded w-full">Lists</li>
-          </a>
+            </Link>
+          </li>
+          <li
+            className="hover:bg-gray-700 p-2 rounded w-full cursor-pointer"
+            onClick={() => setIsSideBarOpen(false)}
+          >
+            <Link to="/lists" className="block w-full">
+              Lists
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
